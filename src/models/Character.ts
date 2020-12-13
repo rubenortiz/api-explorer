@@ -45,7 +45,7 @@ export const Character: Model = {
     },
     {
       name: 'image',
-      type: PropertyType.String,
+      type: PropertyType.Image,
     },
     {
       name: 'episode',

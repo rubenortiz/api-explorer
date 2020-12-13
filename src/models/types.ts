@@ -1,6 +1,7 @@
 export enum PropertyType {
   'ID',
   'String',
+  'Image',
   'Model',
 }
 
