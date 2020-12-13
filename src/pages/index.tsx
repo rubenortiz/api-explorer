@@ -1,37 +1,29 @@
 import Head from 'next/head';
-import { useQuery, gql } from '@apollo/client';
-
-const CHARACTERS = gql`
-  query GetCharacters {
-    characters {
-      results {
-        id
-        name
-      }
-    }
-  }
-`;
+import Link from 'next/link';
+import models from 'models';
+import { Layout } from 'components/Layout';
 
 export default function Home() {
-  const { loading, error, data } = useQuery(CHARACTERS);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error :(</p>;
-  }
-
   return (
     <div>
       <Head>
-        <title>Test Rick & Morty API</title>
+        <title>Test Rick & Morty API Explorer</title>
       </Head>
-      <h1>Characters</h1>
-      {data?.characters?.results.map(({ id, name }) => (
-        <h3 key={id}>{name}</h3>
-      ))}
+      <Layout>
+        <h1 className="mb-5 text-3xl font-extrabold text-gray-900">
+          Rick & Morty
+        </h1>
+        {models.map((model, key) => (
+          <h2
+            key={key}
+            className="text-lg mb-3 leading-6 font-medium text-gray-900"
+          >
+            <Link href="/[model]" as={`/${model.name.toLowerCase()}`}>
+              <a>{model.name}</a>
+            </Link>
+          </h2>
+        ))}
+      </Layout>
     </div>
   );
 }

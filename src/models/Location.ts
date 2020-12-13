@@ -1,7 +1,7 @@
-import { Model, ModelName, RelationType, PropertyType } from 'models';
+import { Model, ModelName, RelationType, PropertyType } from 'models/types';
 
 export const Location: Model = {
-  name: ModelName.Episode,
+  name: ModelName.Location,
   properties: [
     {
       name: 'id',

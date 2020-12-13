@@ -1,4 +1,4 @@
-import { Model, ModelName, RelationType, PropertyType } from 'models';
+import { Model, ModelName, RelationType, PropertyType } from 'models/types';
 
 export const Episode: Model = {
   name: ModelName.Episode,
