@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import models from 'models';
 import { Model, ModelName } from 'models/types';
 import { gql, useQuery } from '@apollo/client';
@@ -26,6 +27,8 @@ export const getStaticPaths = async () => ({
 });
 
 const List: React.FC<{ model: Model }> = ({ model }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   let GET_ALL_QUERY;
 
   const characterBaseProps = `
@@ -58,8 +61,8 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
   switch (model.name) {
     case ModelName.Character:
       GET_ALL_QUERY = gql`
-        query GetAllCharacters {
-          results: characters {
+        query GetAllCharacters($page: Int) {
+          results: characters(page: $page) {
             info {
               count
               pages
@@ -86,8 +89,8 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
       break;
     case ModelName.Location:
       GET_ALL_QUERY = gql`
-        query GetAllCharacters {
-          results: locations {
+        query GetAllCharacters($page: Int) {
+          results: locations(page: $page) {
             info {
               count
               pages
@@ -106,8 +109,8 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
       break;
     case ModelName.Episode:
       GET_ALL_QUERY = gql`
-        query GetAllEpisodes {
-          results: episodes {
+        query GetAllEpisodes($page: Int) {
+          results: episodes(page: $page) {
             info {
               count
               pages
@@ -130,7 +133,9 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
     loading,
     error,
     data: { results: { results = null, info = null } = {} } = {},
-  } = useQuery(GET_ALL_QUERY);
+  } = useQuery(GET_ALL_QUERY, {
+    variables: { page: currentPage },
+  });
 
   return (
     <Layout>
@@ -148,6 +153,9 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
               count={info.count}
               next={info.next}
               prev={info.prev}
+              totalPages={info.pages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         </>

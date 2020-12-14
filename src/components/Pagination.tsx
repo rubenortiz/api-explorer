@@ -7,14 +7,25 @@ type Pagination = React.FC<{
   count: number;
   next: number | null;
   prev: number | null;
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: Function;
 }>;
 
-export const Pagination: Pagination = ({ itemsPerPage, count, next, prev }) => (
+export const Pagination: Pagination = ({
+  itemsPerPage,
+  currentPage,
+  totalPages,
+  count,
+  next,
+  prev,
+  setCurrentPage,
+}) => (
   <nav className="flex justify-between items-center" aria-label="Pagination">
     <p>
-      Showing {itemsPerPage} of {count} entries
+      {`Showing page ${currentPage} of ${totalPages} pages (${itemsPerPage} of ${count} entries)`}
     </p>
-    {prev && <Button>Previous</Button>}
-    {next && <Button>Next</Button>}
+    {prev && <Button onClick={() => setCurrentPage(prev)}>Previous</Button>}
+    {next && <Button onClick={() => setCurrentPage(next)}>Next</Button>}
   </nav>
 );
