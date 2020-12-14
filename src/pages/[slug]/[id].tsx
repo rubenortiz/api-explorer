@@ -1,4 +1,4 @@
-import models from 'models';
+import models, { GET_ONE_QUERY } from 'models';
 import { Model, ModelName } from 'models/types';
 import { gql, useQuery } from '@apollo/client';
 import { Layout } from 'components/Layout';
@@ -26,83 +26,7 @@ const Details: React.FC<{ model: Model; id: number }> = ({ model, id }) => {
     return <p>Loading...</p>;
   }
 
-  let GET_ONE_QUERY;
-
-  const characterBaseProps = `
-    id
-    name
-    status
-    species
-    type
-    gender
-    image
-    created
-  `;
-
-  const episodeBaseProps = `
-    id
-    name
-    air_date
-    episode
-    created
-  `;
-
-  const locationBaseProps = `
-    id
-    name
-    type
-    dimension
-    created
-  `;
-
-  switch (model.name) {
-    case ModelName.Character:
-      GET_ONE_QUERY = gql`
-        query GetCharacter($id: ID!) {
-          result: character(id: $id) {
-            ${characterBaseProps}
-            origin {
-              ${locationBaseProps}
-            }
-            location {
-              ${locationBaseProps}
-            }
-            image
-            episode {
-              ${episodeBaseProps}
-            }
-            created
-          }
-        }
-      `;
-      break;
-    case ModelName.Location:
-      GET_ONE_QUERY = gql`
-        query GetLocation($id: ID!) {
-          result: location(id: $id) {
-            ${locationBaseProps}
-            residents {
-              ${characterBaseProps}
-            }
-          }
-        }
-      `;
-      break;
-    case ModelName.Episode:
-      GET_ONE_QUERY = gql`
-        query GetEpisode($id: ID!) {
-          result: episode(id: $id) {
-            ${episodeBaseProps}
-            characters {
-              ${characterBaseProps}
-            }
-          }
-        }
-      `;
-      break;
-  }
-
-  const { data: { result } = {} } = useQuery(GET_ONE_QUERY, {
+  const { data: { result } = {} } = useQuery(GET_ONE_QUERY(model), {
     variables: { id },
   });
 
