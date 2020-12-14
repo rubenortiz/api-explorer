@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import { Model, Property, PropertyType, RelationType } from 'models/types';
 import { ucfirst } from 'utils/helpers';
 import ContentLoader from 'react-content-loader';
+import models from 'models';
 
 export const Info = ({
   model,
@@ -11,23 +13,68 @@ export const Info = ({
 }) => {
   const renderPropertyValue = (
     property: Property,
-    data: { [index: string]: undefined | string },
+    data: {
+      [index: string]:
+        | undefined
+        | string
+        | Array<{ id: string; name: string }>
+        | { id: string; name: string };
+    },
   ) => {
-    if (!data) return null;
+    const value = data[property.name] ?? null;
 
-    switch (property.type) {
-      case PropertyType.String:
-      case PropertyType.ID:
-        return data[property.name] || '-';
-      case PropertyType.Image:
-        return <img src={data[property.name]} className="my-6" />;
-      case PropertyType.Model:
-        return 'TO-DO';
-        break;
+    if (!value) return null;
+
+    if (typeof value === 'string') {
+      switch (property.type) {
+        case PropertyType.String:
+        case PropertyType.ID:
+          return value || '-';
+        case PropertyType.Image:
+          return <img src={value} className="my-6" />;
+        default:
+          return null;
+      }
     }
 
-    return null;
+    switch (property.type) {
+      case PropertyType.Model:
+        const relationModel = models.find(
+          ({ name }) => name === property.relation?.model,
+        );
+        if (!relationModel) return null;
+        if (Array.isArray(value)) {
+          if (property.relation?.type === RelationType.hasMany) {
+            return value.map((item) => (
+              <Link
+                href="/[slug]/[id]"
+                as={`/${relationModel.slug}/${item.id}`}
+              >
+                <a className="inline-flex bg-blue-500 text-white rounded-full h-6 px-3 justify-center items-center">
+                  {item.name}
+                </a>
+              </Link>
+            ));
+          }
+        } else {
+          if (property.relation?.type === RelationType.hasOne) {
+            return (
+              <Link
+                href="/[slug]/[id]"
+                as={`/${relationModel.slug}/${value.id}`}
+              >
+                <a className="inline-flex bg-blue-500 text-white rounded-full h-6 px-3 justify-center items-center">
+                  {value.name}
+                </a>
+              </Link>
+            );
+          }
+        }
+      default:
+        return null;
+    }
   };
+
   return (
     <table className="w-1/2 divide-y divide-gray-200">
       <thead className="bg-gray-50">
@@ -52,7 +99,7 @@ export const Info = ({
             <td className="px-6 py-3 text-left text-gray-700 font-bold">
               {ucfirst(property.name)}
             </td>
-            <td className="px-6 py-3 text-left text-gray-700">
+            <td className="px-6 py-3 text-left text-gray-700 flex flex-wrap gap-3">
               {data ? (
                 renderPropertyValue(property, data)
               ) : (
