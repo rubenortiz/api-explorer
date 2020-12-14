@@ -10,7 +10,7 @@ export const Layout: Layout = ({ fullWidth = false, children }) => {
   return (
     <div
       className={cn({
-        'px-6 lg:px-8 xl:px-0': true,
+        'py-10 px-6 lg:px-8 xl:px-0': true,
         'container mx-auto': !fullWidth,
       })}
     >

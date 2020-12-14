@@ -22,7 +22,7 @@ export const Table = ({
                 <th
                   key={key}
                   scope="col"
-                  className="px-6 py-3 text-left text-xs text-gray-700 uppercase tracking-wider font-bold"
+                  className="px-6 py-3 text-left text-gray-700 font-bold"
                 >
                   {ucfirst(property.name)}
                 </th>
@@ -39,13 +39,7 @@ export const Table = ({
                 key <= MAX_AMOUNT_OF_PROPS && (
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      {row[property.name] && (
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {row[property.name]}
-                          </div>
-                        </div>
-                      )}
+                      {row[property.name] || '-'}
                     </div>
                   </td>
                 ),

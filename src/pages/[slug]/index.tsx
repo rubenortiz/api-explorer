@@ -138,12 +138,14 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
       ) : (
         <>
           <Table model={model} rows={results} />
-          <Pagination
-            itemsPerPage={results.length}
-            count={info.count}
-            next={info.next}
-            prev={info.prev}
-          />
+          <div className="mt-6">
+            <Pagination
+              itemsPerPage={results.length}
+              count={info.count}
+              next={info.next}
+              prev={info.prev}
+            />
+          </div>
         </>
       )}
     </Layout>
