@@ -19,29 +19,27 @@ export const Pagination: Pagination = ({
   next,
   prev,
   setCurrentPage,
-}) => {
-  console.log(pages(currentPage, totalPages));
-  return (
-    <nav className="flex justify-between" aria-label="Pagination">
-      <p>
-        {`Showing page ${currentPage} of ${totalPages} pages (${itemsPerPage} of ${count} entries)`}
-      </p>
-      <div className="flex gap-4">
-        {prev && <Button onClick={() => setCurrentPage(prev)}>Previous</Button>}
-        {pages(currentPage, totalPages).map((page) =>
-          page === '...' ? (
-            '...'
-          ) : (
-            <Button
-              onClick={() => setCurrentPage(page)}
-              active={page === currentPage}
-            >
-              {page}
-            </Button>
-          ),
-        )}
-        {next && <Button onClick={() => setCurrentPage(next)}>Next</Button>}
-      </div>
-    </nav>
-  );
-};
+}) => (
+  <nav className="flex justify-between" aria-label="Pagination">
+    <p>
+      {`Showing page ${currentPage} of ${totalPages} pages (${itemsPerPage} of ${count} entries)`}
+    </p>
+    <div className="flex gap-4">
+      {prev && <Button onClick={() => setCurrentPage(prev)}>Previous</Button>}
+      {pages(currentPage, totalPages).map((page) =>
+        page === '...' ? (
+          '...'
+        ) : (
+          <Button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            active={page === currentPage}
+          >
+            {page}
+          </Button>
+        ),
+      )}
+      {next && <Button onClick={() => setCurrentPage(next)}>Next</Button>}
+    </div>
+  </nav>
+);
