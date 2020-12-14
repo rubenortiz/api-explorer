@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
 import { Model, PropertyType } from 'models/types';
-import cn from 'classnames';
+import { ucfirst } from 'utils/helpers';
 
 export const Table = ({
   model,
@@ -25,7 +24,7 @@ export const Table = ({
                   scope="col"
                   className="px-6 py-3 text-left text-xs text-gray-700 uppercase tracking-wider font-bold"
                 >
-                  {property.name}
+                  {ucfirst(property.name)}
                 </th>
               ),
           )}

@@ -1,18 +1,16 @@
-import { useState } from 'react';
 import models from 'models';
 import { Model, ModelName } from 'models/types';
 import { gql, useQuery } from '@apollo/client';
 import { Layout } from 'components/Layout';
 import { Table } from 'components/Table';
 import { Pagination } from 'components/Pagination';
+import { ucfirst } from 'utils/helpers';
 
 type CtxType = { params: { slug: string } };
 
 export const getStaticProps = async (ctx: CtxType) => {
   const { slug } = ctx.params;
-  const model = models.find(
-    (model) => model.name === `${slug.charAt(0).toUpperCase()}${slug.slice(1)}`,
-  );
+  const model = models.find((model) => model.name === ucfirst(slug));
   return {
     props: { model },
     revalidate: 10,
