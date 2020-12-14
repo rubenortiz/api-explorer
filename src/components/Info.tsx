@@ -47,6 +47,7 @@ export const Info = ({
           if (property.relation?.type === RelationType.hasMany) {
             return value.map((item) => (
               <Link
+                key={`/${relationModel.slug}/${item.id}`}
                 href="/[slug]/[id]"
                 as={`/${relationModel.slug}/${item.id}`}
               >
