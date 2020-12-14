@@ -80,11 +80,11 @@ export const Table = ({
                 )}
 
                 <td className="px-6 py-4">
-                  <Button>
-                    <Link href="/[slug]/[id]" as={`/${model.slug}/${row.id}`}>
-                      <a>View</a>
-                    </Link>
-                  </Button>
+                  <Link href="/[slug]/[id]" as={`/${model.slug}/${row.id}`}>
+                    <a>
+                      <Button>View</Button>
+                    </a>
+                  </Link>
                 </td>
               </tr>
             ))
