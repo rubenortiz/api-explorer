@@ -9,8 +9,6 @@ export const Table = ({
   rows: Array<{ [index: string]: undefined | string }>;
 }) => {
   const MAX_AMOUNT_OF_PROPS = 5;
-  console.log(model.properties);
-  console.log(rows);
   return (
     <table className="min-w-full divide-y divide-gray-200">
       <thead className="bg-gray-50">
