@@ -89,7 +89,7 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
       break;
     case ModelName.Location:
       GET_ALL_QUERY = gql`
-        query GetAllCharacters($page: Int) {
+        query GetAllLocations($page: Int) {
           results: locations(page: $page) {
             info {
               count
