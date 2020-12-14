@@ -21,6 +21,7 @@ export const Info = ({
         | { id: string; name: string };
     },
   ) => {
+    console.log(data);
     const value = data[property.name] ?? null;
 
     if (!value) return '-';
@@ -59,7 +60,7 @@ export const Info = ({
           }
         } else {
           if (property.relation?.type === RelationType.hasOne) {
-            return (
+            return value.id ? (
               <Link
                 href="/[slug]/[id]"
                 as={`/${relationModel.slug}/${value.id}`}
@@ -68,6 +69,8 @@ export const Info = ({
                   {value.name}
                 </a>
               </Link>
+            ) : (
+              value.name
             );
           }
         }
