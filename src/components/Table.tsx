@@ -36,13 +36,13 @@ export const Table = ({
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
-        {rows.map((row) => (
-          <tr>
+        {rows.map((row, rowKey) => (
+          <tr key={rowKey}>
             {model.properties.map(
               (property, key) =>
                 property.type === PropertyType.String &&
                 key <= MAX_AMOUNT_OF_PROPS && (
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap" key={key}>
                     <div className="flex items-center">
                       {row[property.name] || '-'}
                     </div>
