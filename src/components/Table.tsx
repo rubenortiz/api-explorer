@@ -1,5 +1,6 @@
 import { Model, PropertyType } from 'models/types';
 import { ucfirst } from 'utils/helpers';
+import { Button } from 'components/Button';
 
 export const Table = ({
   model,
@@ -26,6 +27,12 @@ export const Table = ({
                 </th>
               ),
           )}
+          <th
+            scope="col"
+            className="px-6 py-3 text-left text-gray-700 font-bold"
+          >
+            Actions
+          </th>
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
@@ -42,6 +49,9 @@ export const Table = ({
                   </td>
                 ),
             )}
+            <td className="px-6 py-4">
+              <Button>View</Button>
+            </td>
           </tr>
         ))}
       </tbody>

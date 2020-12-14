@@ -142,7 +142,7 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
       ) : (
         <>
           <Table model={model} rows={results} />
-          <div className="mt-6">
+          <div className="my-8">
             <Pagination
               itemsPerPage={results.length}
               count={info.count}
