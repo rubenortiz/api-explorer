@@ -138,7 +138,7 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
   });
 
   return (
-    <Layout>
+    <Layout currentModel={model.name}>
       <h1 className="text-4xl font-bold text-gray-900 mb-8">
         {pluralize(model.name)}
       </h1>

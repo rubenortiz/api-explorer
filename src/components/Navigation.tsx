@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import models from 'models';
 import pluralize from 'pluralize';
+import cn from 'classnames';
 
-export const Navigation = () => {
+export const Navigation = ({
+  currentModel,
+}: {
+  currentModel: string | null;
+}) => {
   return (
     <div className="flex flex-col w-56 bg-white overflow-hidden">
       <div className="flex items-center justify-center shadow-md py-4">
@@ -27,7 +32,10 @@ export const Navigation = () => {
             >
               <a
                 href="#"
-                className="flex flex-row items-center h-12 transform hover:translate-x-1 hover:text-cyan-700 transition-transform ease-in duration-200"
+                className={cn({
+                  'flex flex-row items-center h-12 transform hover:translate-x-1 hover:text-cyan-700 transition-transform ease-in duration-200': true,
+                  'text-cyan-700': currentModel === model.name,
+                })}
               >
                 <span
                   className="font-semibold px-6 text-lg 
