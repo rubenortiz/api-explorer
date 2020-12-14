@@ -11,7 +11,7 @@ type CtxType = { params: { slug: string } };
 
 export const getStaticProps = async (ctx: CtxType) => {
   const { slug } = ctx.params;
-  const model = models.find((model) => model.name === ucfirst(slug));
+  const model = models.find((model) => pluralize(model.name) === ucfirst(slug));
   return {
     props: { model },
     revalidate: 10,
@@ -20,7 +20,7 @@ export const getStaticProps = async (ctx: CtxType) => {
 
 export const getStaticPaths = async () => ({
   paths: models.map((model) => ({
-    params: { slug: model.name.toLowerCase() },
+    params: { slug: pluralize(model.name.toLowerCase()) },
   })),
   fallback: false,
 });

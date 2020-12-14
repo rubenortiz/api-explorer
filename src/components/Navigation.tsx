@@ -21,7 +21,10 @@ export const Navigation = () => {
       <ul className="flex flex-col py-4">
         {models.map((model, key) => (
           <li key={key}>
-            <Link href="/[model]" as={`/${model.name.toLowerCase()}`}>
+            <Link
+              href="/[model]"
+              as={`/${pluralize(model.name.toLowerCase())}`}
+            >
               <a
                 href="#"
                 className="flex flex-row items-center h-12 transform hover:translate-x-1 transition-transform ease-in duration-200"
