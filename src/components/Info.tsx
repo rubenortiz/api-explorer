@@ -21,7 +21,6 @@ export const Info = ({
         | { id: string; name: string };
     },
   ) => {
-    console.log(data);
     const value = data[property.name] ?? null;
 
     if (!value) return '-';
