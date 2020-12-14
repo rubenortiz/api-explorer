@@ -5,6 +5,7 @@ import { Layout } from 'components/Layout';
 import { Table } from 'components/Table';
 import { Pagination } from 'components/Pagination';
 import { ucfirst } from 'utils/helpers';
+import pluralize from 'pluralize';
 
 type CtxType = { params: { slug: string } };
 
@@ -133,6 +134,9 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
 
   return (
     <Layout>
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">
+        {pluralize(model.name)}
+      </h1>
       {loading ? (
         <p>Loading...</p>
       ) : (

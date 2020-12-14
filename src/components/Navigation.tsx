@@ -26,7 +26,7 @@ export const Navigation = () => {
                 href="#"
                 className="flex flex-row items-center h-12 transform hover:translate-x-1 transition-transform ease-in duration-200"
               >
-                <span className="font-medium px-6 text-lg text-cyan-700">
+                <span className="font-semibold px-6 text-lg text-cyan-700">
                   {pluralize(model.name)}
                 </span>
               </a>
