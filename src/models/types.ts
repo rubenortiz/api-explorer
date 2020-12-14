@@ -16,14 +16,16 @@ export enum RelationType {
   'hasMany',
 }
 
+export interface Property {
+  name: string;
+  type: PropertyType;
+  relation?: {
+    model: ModelName;
+    type: RelationType;
+  };
+}
+
 export interface Model {
   name: ModelName;
-  properties: Array<{
-    name: string;
-    type: PropertyType;
-    relation?: {
-      model: ModelName;
-      type: RelationType;
-    };
-  }>;
+  properties: Array<Property>;
 }

@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { Model, PropertyType } from 'models/types';
 import { ucfirst } from 'utils/helpers';
 import { Button } from 'components/Button';
 import ContentLoader from 'react-content-loader';
+import pluralize from 'pluralize';
 
 export const Table = ({
   model,
@@ -79,7 +81,14 @@ export const Table = ({
                 )}
 
                 <td className="px-6 py-4">
-                  <Button>View</Button>
+                  <Button>
+                    <Link
+                      href="/[model]/[id]"
+                      as={`/${pluralize(model.name.toLowerCase())}/${row.id}`}
+                    >
+                      <a>View</a>
+                    </Link>
+                  </Button>
                 </td>
               </tr>
             ))

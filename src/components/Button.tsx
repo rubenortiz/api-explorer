@@ -3,11 +3,11 @@ import cn from 'classnames';
 
 export const Button = ({
   children,
-  onClick,
+  onClick = () => false,
   active = false,
 }: {
   children: ReactNode;
-  onClick: any;
+  onClick?: any;
   active?: boolean;
 }) => (
   <button
