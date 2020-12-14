@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import models from 'models';
 import { Model, ModelName } from 'models/types';
 import { gql, useQuery } from '@apollo/client';
 import { Layout } from 'components/Layout';
-import { Table } from 'components/Table';
 import { Info } from 'components/Info';
-import { ucfirst } from 'utils/helpers';
 import pluralize from 'pluralize';
 
 type CtxType = { params: { slug: string; id: number } };
 
 export const getStaticProps = async (ctx: CtxType) => {
   const { slug, id } = ctx.params;
-  const model = models.find((model) => pluralize(model.name) === ucfirst(slug));
+  const model = models.find((model) => model.slug === slug);
   return {
     props: { model, id },
     revalidate: 10,

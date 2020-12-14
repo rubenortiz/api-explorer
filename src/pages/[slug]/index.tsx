@@ -5,14 +5,13 @@ import { gql, useQuery } from '@apollo/client';
 import { Layout } from 'components/Layout';
 import { Table } from 'components/Table';
 import { Pagination } from 'components/Pagination';
-import { ucfirst } from 'utils/helpers';
 import pluralize from 'pluralize';
 
 type CtxType = { params: { slug: string } };
 
 export const getStaticProps = async (ctx: CtxType) => {
   const { slug } = ctx.params;
-  const model = models.find((model) => pluralize(model.name) === ucfirst(slug));
+  const model = models.find((model) => model.slug === slug);
   return {
     props: { model },
     revalidate: 10,
@@ -20,8 +19,8 @@ export const getStaticProps = async (ctx: CtxType) => {
 };
 
 export const getStaticPaths = async () => ({
-  paths: models.map((model) => ({
-    params: { slug: pluralize(model.name.toLowerCase()) },
+  paths: models.map(({ slug }) => ({
+    params: { slug },
   })),
   fallback: false,
 });

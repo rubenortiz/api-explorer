@@ -27,5 +27,6 @@ export interface Property {
 
 export interface Model {
   name: ModelName;
+  slug: string;
   properties: Array<Property>;
 }

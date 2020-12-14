@@ -1,7 +1,9 @@
 import { Model, ModelName, RelationType, PropertyType } from 'models/types';
+import pluralize from 'pluralize';
 
 export const Character: Model = {
   name: ModelName.Character,
+  slug: pluralize(ModelName.Character).toLowerCase(),
   properties: [
     {
       name: 'id',

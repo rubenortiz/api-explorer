@@ -1,8 +1,6 @@
 import { Model, Property, PropertyType, RelationType } from 'models/types';
 import { ucfirst } from 'utils/helpers';
 import ContentLoader from 'react-content-loader';
-import Link from 'next/link';
-import pluralize from 'pluralize';
 
 export const Info = ({
   model,
