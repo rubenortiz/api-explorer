@@ -23,7 +23,7 @@ export const Info = ({
   ) => {
     const value = data[property.name] ?? null;
 
-    if (!value) return null;
+    if (!value) return '-';
 
     if (typeof value === 'string') {
       switch (property.type) {
@@ -72,7 +72,7 @@ export const Info = ({
           }
         }
       default:
-        return null;
+        return '-';
     }
   };
 
