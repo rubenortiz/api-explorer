@@ -130,8 +130,6 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
   }
 
   const {
-    loading,
-    error,
     data: { results: { results = null, info = null } = {} } = {},
   } = useQuery(GET_ALL_QUERY, {
     variables: { page: currentPage },
@@ -142,23 +140,19 @@ const List: React.FC<{ model: Model }> = ({ model }) => {
       <h1 className="text-4xl font-bold text-gray-900 mb-8">
         {pluralize(model.name)}
       </h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <Table model={model} rows={results} />
-          <div className="my-8">
-            <Pagination
-              itemsPerPage={results.length}
-              count={info.count}
-              next={info.next}
-              prev={info.prev}
-              totalPages={info.pages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </div>
-        </>
+      <Table model={model} rows={results} />
+      {results && (
+        <div className="my-8">
+          <Pagination
+            itemsPerPage={results.length}
+            count={info.count}
+            next={info.next}
+            prev={info.prev}
+            totalPages={info.pages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       )}
     </Layout>
   );
